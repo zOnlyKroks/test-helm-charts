@@ -205,6 +205,15 @@ jobs:
             echo "No schema changes detected"
           fi
 
+      - name: Debug commit conditions
+        if: steps.determine-charts.outputs.charts != ''
+        run: |
+          echo "Debug information for commit step:"
+          echo "  github.event_name: ${{ github.event_name }}"
+          echo "  github.ref: ${{ github.ref }}"
+          echo "  has_changes: ${{ steps.check-changes.outputs.has_changes }}"
+          echo "  Should commit to main: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && steps.check-changes.outputs.has_changes == 'true' }}"
+
       - name: Commit and push schema updates (push to main)
         if: |
           (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
