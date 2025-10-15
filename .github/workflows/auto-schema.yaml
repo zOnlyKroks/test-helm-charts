@@ -207,7 +207,7 @@ jobs:
 
       - name: Commit and push schema updates (push to main)
         if: |
-          github.event_name == 'push' &&
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
           github.ref == 'refs/heads/main' &&
           steps.check-changes.outputs.has_changes == 'true'
         run: |
