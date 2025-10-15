@@ -58,7 +58,7 @@ jobs:
             helm plugin list | grep "schema"
           else
             echo "Installing helm-values-schema-json plugin..."
-            helm plugin install https://github.com/losisin/helm-values-schema-json.git --version v1.4.3
+            helm plugin install https://github.com/losisin/helm-values-schema-json.git --version v1.9.2
           fi
 
           # Verify plugin installation
